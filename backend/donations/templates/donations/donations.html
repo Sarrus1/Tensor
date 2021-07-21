@@ -1,0 +1,119 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<style>
+  .row {
+    display: flex !important;
+  }
+  .col {
+    flex: 1 !important;
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Donations</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Donations</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-12 text-center">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">Donations</h3>
+						</div>
+						<div class="card-body primary">
+              <div align="left">
+                <p>
+                  Donations are the best way to support the owner in hosting the servers, as server hosting is expensive.
+                  <br>
+                  Please note that the VIP perks are a way of encouraging people to donate, and not an actual service we provide. Those perks are likely to evolve, often to add features.
+                  <br>
+                  Therefore, <u>we do not accept refunds.</u>
+                  <br>
+                  However, if you encounter problems during your purchase, you can contact the owner on discord for assistance. This is a one man operation, please understand that we might not answer you the same day.
+                  <br>
+                  Please note that all the perks listed below are available on all servers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div class="card card-primary flex-column h-100">
+						<div class="card-header">
+							<h3 class="card-title">VIP Perks</h3>
+						</div>
+						<div class="card-body primary">
+              <ul>
+                <li>[VIP] tag</li>
+                <li>Reserved slot</li>
+                <li>Access to !gloves</li>
+              </ul>
+              On server where those are available.
+            </div>
+					</div>
+        </div>
+        <div class="col">
+          <div class="card card-primary flex-column h-100">
+            <div class="card-header">
+              <h3 class="card-title">Durations</h3>
+            </div>
+            <div class="card-body primary">
+              <div align="left">
+                <ul>
+                  <li>1 Week VIP: 1€</li>
+                  <li>1 Month VIP: 2€</li>
+                  <li>3 Months VIP: 5€</li>
+                  <li>12 Months VIP: 15€</li>
+                  <li>Permanent VIP: 20€</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Donating</h3>
+            </div>
+            <div class="card-body primary">
+              <div id="root"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
+{% block extra_js %}
+<script>const clientID = "{{clientID}}"</script>
+<script src="https://www.paypal.com/sdk/js?client-id={{clientID}}&currency=EUR"></script>
+<script src="{% static 'js/donations.js' %}"></script>
+{% endblock extra_js %}

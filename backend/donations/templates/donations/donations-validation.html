@@ -1,0 +1,73 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Donation validation</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item "><a href="/donations/">Donations</a></li>
+            <li class="breadcrumb-item active">Donation validation</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Validation</h3>
+            </div>
+            <div class="card-body primary">
+              <div class="row">
+                <div class="col-12 text-center">
+                  <h2>Please confirm that this is you:</h2>
+                  <img src="{{ profile.avatar }}" alt="" class="img-circle img-fluid">
+                  <br>
+                  <h2>
+                    <a href="{{ profile.link }}">{{ profile.name }}</a>
+                  </h2>
+                  <br>
+                  <h2>Please confirm that the donation amount is correct:</h2>
+                  <br>
+                  <h4>You wish to donate {{ profile.amount }}</h4>
+                  <br>
+                  {% if profile.is_permanent %}
+                    For your generosity, you will receive the VIP status permanently.
+                  {% else %}
+                    For your generosity, you will receive the VIP status for {{ profile.duration }}, starting on {{ profile.today }} and ending on {{ profile.end }}.
+                  {% endif %}
+                  <br>
+                  If this is you, and you agree, please click below, to proceed with your donation, you will be redirected to PayPal to process your contribution.
+                </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col-12 text-center">
+                  {{ form.render }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}

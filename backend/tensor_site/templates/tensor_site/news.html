@@ -1,0 +1,68 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">News</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">News</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <section class="content">
+        <div class="container-fluid">
+          
+          <!-- Timelime  -->
+          {% for news in news %}
+          <div class="row">
+            <div class="col-md-12">
+              <!-- The time line -->
+              <div class="timeline">
+                <!-- timeline time label -->
+                <div class="time-label">
+                  <span class="bg-red">{{ news.date }}</span>
+                </div>
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <div>
+                  <i class="fas fa-envelope bg-blue"></i>
+                  <div class="timeline-item">
+                    <h3 class="timeline-header"><a href="#">{{ news.title }}</a></h3>
+                    <div class="timeline-body">
+                      {{ news.content |safe }}
+                    </div>
+                  </div>
+                </div>
+                <!-- END timeline item -->
+                <div>
+                  <i class="fas fa-clock bg-gray"></i>
+                </div>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+        <!-- /.timeline -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}

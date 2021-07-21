@@ -1,0 +1,279 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head %}
+<style>
+	.hidden {
+		display: none;
+	}
+	.m-fadeOut {
+		display: none;
+		opacity: 0;
+		transition: visibility 0s linear 300ms, opacity 300ms;
+	}
+	.m-fadeIn {
+		display: contents;
+		opacity: 1;
+		transition: visibility 0s linear 0s, opacity 300ms;
+	}
+	</style>
+{% endblock head %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Moderator Application Form</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Moderator Application</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-12 text-center">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">Moderators</h3>
+						</div>
+						<div class="card-body primary">
+              <div align="left">
+                <p>
+                  The role of Moderators is to proctect everybody's experience on the server.
+                  <br>
+                  This include kicking and banning people if they are toxic/cheating.
+                  <br>
+                  It also implies to be active on the Discord server.
+                  <br>
+                  We are looking for people who can keep their cool when dealing with toxic people, and who can be active at least 2 hours per week.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Application form</h3>
+            </div>
+            <div class="card-body primary">
+              <form action="/moderator-application/" method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-sm-12">
+                    <label>On what server do you want to be a Moderator ?</label>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fas fa-server"></i>
+                        </span>
+                      </div>
+                      {% if form.is_bound %}
+                        {% if form.Server.errors %}
+                          {% render_field form.Server class="form-control is-invalid" %}
+                          {% for error in form.Server.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                        {% render_field form.Server class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field form.Server class="form-control" %}
+                      {% endif %}
+                    </div>
+                    <label>What is your email adress ?</label>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fas fa-at"></i>
+                        </span>
+                      </div>
+                      {% if form.is_bound %}
+                        {% if form.Email.errors %}
+                          {% render_field form.Email class="form-control is-invalid" %}
+                          {% for error in form.Email.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                        {% render_field form.Email class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field form.Email class="form-control" %}
+                      {% endif %}
+                    </div>
+                    <label>What is your Discord ID ?</label>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fab fa-discord"></i>
+                        </span>
+                      </div>
+                      {% if form.is_bound %}
+                        {% if form.Discord.errors %}
+                          {% render_field form.Discord class="form-control is-invalid" %}
+                          {% for error in form.Discord.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                        {% render_field form.Discord class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field form.Discord class="form-control" %}
+                      {% endif %}
+                    </div>
+                    <label>How old are you ?</label>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fas fa-user"></i>
+                        </span>
+                      </div>
+                      {% if form.is_bound %}
+                        {% if form.Age.errors %}
+                          {% render_field form.Age class="form-control is-invalid" %}
+                          {% for error in form.Age.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                        {% render_field form.Age class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field form.Age class="form-control" %}
+                      {% endif %}
+                    </div>
+										<div id="HaveYouEver">
+											<label>Have you ever been a moderator/admin ?</label>
+											<div class="input-group mb-4">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-check-circle"></i>
+													</span>
+												</div>
+												{% if form.is_bound %}
+													{% if form.Experience.errors %}
+														{% render_field form.Experience class="form-control is-invalid" %}
+														{% for error in form.Experience.errors %}
+															<div class="invalid-feedback">
+																{{ error }}
+															</div>
+														{% endfor %}
+													{% else %}
+													{% render_field form.Experience class="form-control is-valid" %}
+													{% endif %}
+												{% else %}
+													{% render_field form.Experience class="form-control" value="no" %}
+												{% endif %}
+											</div>
+										</div>
+										<div id="IfHaveYouEver" class="hidden">
+											<label>If you answered "yes" to the previous question, tell us more about your experience.</label>
+											<div class="input-group mb-4">
+												<div class="input-group-prepend">
+													<span class="input-group-text">
+														<i class="fa fa-clipboard"></i>
+													</span>
+												</div>
+												{% if form.is_bound %}
+													{% if form.Experience_more.errors %}
+														{% render_field form.Experience_more class="form-control is-invalid" %}
+														{% for error in form.Experience_more.errors %}
+															<div class="invalid-feedback">
+																{{ error }}
+															</div>
+														{% endfor %}
+													{% else %}
+													{% render_field form.Experience_more class="form-control is-valid" %}
+													{% endif %}
+												{% else %}
+													{% render_field form.Experience_more class="form-control" %}
+												{% endif %}
+											</div>
+										</div>
+                    <label>Why do you want to become a moderator/admin ?</label>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-clipboard"></i>
+                        </span>
+                      </div>
+                      {% if form.is_bound %}
+                        {% if form.Reason.errors %}
+                          {% render_field form.Reason class="form-control is-invalid" %}
+                          {% for error in form.Reason.errors %}
+                            <div class="invalid-feedback">
+                              {{ error }}
+                            </div>
+                          {% endfor %}
+                        {% else %}
+                        {% render_field form.Reason class="form-control is-valid" %}
+                        {% endif %}
+                      {% else %}
+                        {% render_field form.Reason class="form-control" %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-5 text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ form.render }}
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
+{% block extra_js %}
+<script>
+	// function that hides/shows field_four based upon field_three value
+	function check_field_value(new_val) {
+		if(new_val == "yes") {
+			$('#IfHaveYouEver').removeClass('hidden');
+			$('#IfHaveYouEver').removeClass('m-fadeOut');
+			$('#IfHaveYouEver').addClass('m-fadeIn');
+		} else {
+			$('#IfHaveYouEver').removeClass('hidden');
+			$('#IfHaveYouEver').removeClass('m-fadeIn');
+			$('#IfHaveYouEver').addClass('m-fadeOut');
+		}
+	}
+	// this is executed once when the page loads
+	$(document).ready(function() {
+		var MyValue = $("#id_Experience").val();
+		check_field_value(MyValue);
+		$('#HaveYouEver').change( function() {
+			var MyValue = $("#id_Experience").val();
+			check_field_value(MyValue);
+		});
+	});
+</script>
+{% endblock extra_js %}

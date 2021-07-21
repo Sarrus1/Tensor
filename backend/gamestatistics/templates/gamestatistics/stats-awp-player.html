@@ -1,0 +1,130 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% block head %}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.10.21/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.5/responsive.bootstrap4.min.css">
+{% endblock head %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Statistics of {{ name }}</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">AWP statistics</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General statistics</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table class="table">
+                <tr>
+                  <th>Score</th>
+                  <td>{{ score }}</td>
+                </tr>
+                <tr>
+                  <th>Kills</th>
+                  <td>{{ kills }}</td>
+                </tr>
+                <tr>
+                  <th>Deaths</th>
+                  <td>{{ deaths }}</td>
+                </tr>
+                <tr>
+                  <th>K/D</th>
+                  <td>{{ KD }}</td>
+                </tr>
+                <tr>
+                  <th>A.D.R</th>
+                  <td>{{ ADR }}</td>
+                </tr>
+                <tr>
+                  <th>Headshots</th>
+                  <td>{{ HS }}</td>
+                </tr>
+                <tr>
+                  <th>Playtime</th>
+                  <td>{{ playtime }}</td>
+                </tr>
+            </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class='col-sm-4'>
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Accuracy</h3>
+            </div>
+            <div class="card-body">
+              <div id="accuracy" style="min-height: 343px; height: 343px; max-height: 343px; max-width: 100%;"></div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class='col-sm-4'>
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Hitbox</h3>
+            </div>
+            <div class="card-body">
+              <div id="hitbox" style="min-height: 343px; height: 343px; max-height: 343px; max-width: 100%;"></div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}
+<!-- /.content-wrapper -->
+<!-- page script -->
+{% block extra_js %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script>
+  new Morris.Donut({
+    element: 'accuracy',
+    data: [
+      { label: "Missed", value: {{ shots }} - {{ hits }}},
+      { label: "Hit", value: {{ hits }}}
+    ]
+  });
+  new Morris.Donut({
+    element: 'hitbox',
+    data: [
+      { label: "Head", value: {{ head }}},
+      { label: "Chest", value: {{ chest }}},
+      { label: "Stomach", value: {{ stomach }}},
+      { label: "Left arm", value: {{ left_arm }}},
+      { label: "Right arm", value: {{ right_arm }}},
+      { label: "Left leg", value: {{ left_leg }}},
+      { label: "Right leg", value: {{ right_leg }}}
+    ]
+  });
+</script>
+{% endblock extra_js %}

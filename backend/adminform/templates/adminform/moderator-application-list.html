@@ -1,0 +1,64 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Moderator Applications List</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Moderator Applications List</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">List</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body p-0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Server</th>
+              <th>Status</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for application in ApplicationList %}
+            <tr>
+              <td>{{application.Name}}</td>
+              <td>{{application.Server}}</td>
+              <td>{{application.Status}}</td>
+              <td><a type="button" href="{{application.Button}}" class="btn btn-block btn-primary">Link</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}

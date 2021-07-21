@@ -1,0 +1,194 @@
+{% extends 'tensor_site/base.html' %} {% load static %} {% block head%}
+<!-- Charts.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+{% endblock head %} {% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Servers</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Servers</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-->
+  </div>
+  <div class="content">
+    <div class="container-fluid">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% for server in servers %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">{{ server.server.name }}</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <table class="table table">
+                    <tbody>
+                      <tr>
+                        <td>Players</td>
+                        <td>{{ server.data.players }}/{{ server.data.max }}</td>
+                      </tr>
+                      <tr>
+                        <td>Current map</td>
+                        <td>{{ server.data.map }}</td>
+                      </tr>
+                      <tr>
+                        <td>IP</td>
+                        <td>{{ server.data.ip }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a
+                    type="button"
+                    href="{{ server.data.adress }}"
+                    class="btn btn-block btn-info"
+                    >Join</a
+                  >
+                </div>
+                <div class="col-md-2 mt-3">
+                  <img
+                    src="{{ server.data.image }}"
+                    class="rounded mx-auto d-block"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <div class="chart">
+                    <canvas
+                      id="areaChart{{ server.server.port }}"
+                      style="
+                        min-height: 100px;
+                        height: 200px;
+                        max-height: 250px;
+                        max-width: 100%;
+                      "
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+              {% if can_control %}
+              <div class="row mt-2">
+                <div class="col-md-3 mt-2">
+                  <a
+                    type="button"
+                    href="{% url 'servers-control' server_port=server.server.port server_command='1' %}"
+                    class="btn btn-block btn-success"
+                    >Start</a
+                  >
+                </div>
+                <div class="col-md-3 mt-2">
+                  <a
+                    type="button"
+                    href="{% url 'servers-control' server_port=server.server.port server_command='2' %}"
+                    class="btn btn-block btn-danger"
+                    >Stop</a
+                  >
+                </div>
+                <div class="col-md-3 mt-2">
+                  <a
+                    type="button"
+                    href="{% url 'servers-control' server_port=server.server.port server_command='3' %}"
+                    class="btn btn-block btn-info"
+                    >Restart</a
+                  >
+                </div>
+                <div class="col-md-3 mt-2">
+                  <a
+                    type="button"
+                    href="{% url 'servers-control' server_port=server.server.port server_command='4' %}"
+                    class="btn btn-block btn-warning"
+                    >Update</a
+                  >
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <script>
+          $.ajax({
+            method: "GET",
+            url: "{% url 'servers-playercount' server_port=server.server.port %}",
+            success: function (data) {
+              new Chart(
+                document.getElementById("areaChart{{ server.server.port }}"),
+                {
+                  type: "line",
+                  data: {
+                    labels: data.labels,
+                    datasets: [
+                      {
+                        label: "Number of players",
+                        backgroundColor: "rgba(60,141,188,0.9)",
+                        borderColor: "rgba(60,141,188,0.8)",
+                        pointRadius: false,
+                        pointColor: "#3b8bba",
+                        pointStrokeColor: "rgba(60,141,188,1)",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(60,141,188,1)",
+                        data: data.data,
+                      },
+                    ],
+                  },
+                  options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    legend: {
+                      display: false,
+                    },
+                    scales: {
+                      xAxes: [
+                        {
+                          gridLines: {
+                            display: false,
+                          },
+                        },
+                      ],
+                      yAxes: [
+                        {
+                          gridLines: {
+                            display: false,
+                          },
+                          ticks: {
+                            min: 0,
+                            max: data.max,
+                          },
+                          afterTickToLabelConversion: function (scaleInstance) {
+                            // set the last tick to null so it does not display
+                            scaleInstance.ticks[0] = null;
+                            scaleInstance.ticksAsNumbers[0] = null;
+                          },
+                        },
+                      ],
+                    },
+                  },
+                }
+              );
+            },
+            error: function (data) {
+              console.log("Error");
+            },
+          });
+        </script>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

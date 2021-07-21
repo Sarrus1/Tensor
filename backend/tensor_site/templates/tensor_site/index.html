@@ -1,0 +1,263 @@
+{% extends 'tensor_site/base.html' %} {% load static %} {% block content %}
+<style>
+  .row {
+    display: flex !important;
+  }
+  .col-lg-6 {
+    flex: 1 !important;
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        {% if messages %}
+        <div class="col-sm-12">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="col-sm-6"></div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row mb-5 mt-5">
+        <div class="col-12 text-center">
+          <h1>Welcome to Tensor</h1>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-sm-4 text-center">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <i class="far fa-thumbs-up fa-5x"></i>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              We provide free servers for everybody to enjoy.
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <i class="fas fa-globe-europe fa-5x"></i>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              We are a european CS:GO server community based in France.
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <i class="fas fa-user-tie fa-5x"></i>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              We have an active admin team to monitor our servers.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>{{ stats.total_players }}</h3>
+              <p>Total Users</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-users"></i>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>{{ stats.total_time }}</h3>
+              <p>Days played</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-clock"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>{{ stats.total_bans }}</h3>
+              <p>Bans</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-ban"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>{{ stats.total_servers }}</h3>
+              <p>Servers</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-server"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row mb-3">
+        <div class="col-lg-6">
+          <div class="card card-primary h-100">
+            <div class="card-header">
+              <h3 class="card-title">Servers list</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap h-100">
+                <thead>
+                  <tr>
+                    <th>Server</th>
+                    <th>Map</th>
+                    <th>Players</th>
+                    <th>IP</th>
+                    <th>Join</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for server in servers %}
+                  <tr>
+                    <td>{{ server.server.name }}</td>
+                    <td>{{ server.data.map }}</td>
+                    <td>
+                      {{ server.data.players }}/{{ server.data.max }}
+                      <div class="progress progress-xs">
+                        <div
+                          class="progress-bar progress-bar-danger"
+                          style="width:{{ server.data.percent }}"
+                        ></div>
+                      </div>
+                    </td>
+                    <td>{{ server.data.ip }}</td>
+                    <td>
+                      <a
+                        type="button"
+                        href="{{ server.data.adress }}"
+                        class="btn btn-block btn-info"
+                        >Join</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-lg-6">
+          <div class="card card-primary h-100">
+            <div class="card-header">
+              <h3 class="card-title">Latest bans</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap h-100">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>SteamID</th>
+                    <th>Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for ban in bans %}
+                  <tr>
+                    <td>{{ ban.Name }}</td>
+                    <td>{{ ban.SteamID }}</td>
+                    <td>{{ ban.Length }}</td>
+                    <!-- <td><a type="button" class="btn btn-block btn-danger">{{ ban.Length }}</a></td> -->
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <!-- Timelime  -->
+      <div class="row">
+        <div class="col-md-12">
+          <!-- The time line -->
+          <div class="timeline">
+            <!-- timeline time label -->
+            <div class="time-label">
+              <span class="bg-red">{{ news.date }}</span>
+            </div>
+            <!-- /.timeline-label -->
+            <!-- timeline item -->
+            <div>
+              <i class="fas fa-envelope bg-blue"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header">
+                  <a href="#">{{ news.title }}</a>
+                </h3>
+                <div class="timeline-body">{{ news.content |safe }}</div>
+              </div>
+            </div>
+            <!-- END timeline item -->
+            <div>
+              <i class="fas fa-clock bg-gray"></i>
+            </div>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.timeline -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}

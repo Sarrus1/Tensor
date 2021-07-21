@@ -1,0 +1,83 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">News</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Donations</li>
+            <li class="breadcrumb-item active">Confirmed</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					{% if post %}
+					<div class="card card-success">
+						<div class="card-header">
+              <h3 class="card-title">Payment completed</h3>
+            </div>
+            <div class="card-body primary">
+              <div align="left">
+								<p>
+									Thanks you for your donation {{ post.option_selection2_1 }}! You have donated {{ post.mc_gross }}€.
+									<br>
+									For your generosity, you will receive {{ post.item_name1 }}.
+									<br>
+									Your payement has been processed by Paypal and you will receive your VIP perks in a few minutes.
+								</p>
+								<div class="mt-5 text-center">
+                  <a class="btn btn-primary" href="/" role="button">Home</a>
+                </div>
+							</div>
+						</div>
+					</div>
+					{% else %}
+					<div class="card card-primary">
+						<div class="card-header">
+              <h3 class="card-title">Donations</h3>
+            </div>
+            <div class="card-body primary">
+              <div align="left">
+								<p>
+                  Donations are the best way to support the owner in hosting the servers, as server hosting is expensive.
+                  <br>
+                  Please note that the VIP perks are a way of encouraging people to donate, and not an actual service we provide. Those perks are likely to evolve, often to add features.
+                  <br>
+                  Therefore, <u>we do not accept refunds.</u>
+                  <br>
+                  However, if you encounter problems during your purchase, you can contact the owner on discord for assistance. This is a one man operation, please understand that we might not answer you the same day.
+                  <br>
+                  Please note that all the perks listed below are available on all servers.
+                </p>
+								<div class="mt-5 text-center">
+                  <a class="btn btn-primary" href="/donations/" role="button">Donate</a>
+                </div>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}

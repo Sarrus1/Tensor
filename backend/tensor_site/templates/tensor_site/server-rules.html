@@ -1,0 +1,195 @@
+{% extends 'tensor_site/base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Server-Rules</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Server-rules</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">General rules</h3>
+      </div>
+      <div class="card-body pb-0">
+        <h2>
+          The following rules apply to all servers:
+        </h2>
+        <h3>
+          General rules of conduct:
+        </h3>
+        <ul>
+          <li>
+            Hate-Speech/racism and other forms of discrimination is forbidden, it will result in a comms ban or ban.
+          </li>
+          <li>
+            Harassment and bullying of any kind is forbidden, it will result in a comms ban or ban.
+          </li>
+          <li>
+            Sexism is forbidden, it will result in a comms ban or ban.
+          </li>
+          <li>
+            You can appeal a ban <a href="https://data.tensor.fr/sourceban/">here</a>.
+          </li>
+        </ul>
+        <h3>Game specific rules</h2>
+        <ul>
+          <li>
+            Admins and moderators are sovereign. They decide what is allowed and what is not allowed. You can report abuses on Discord.
+          </li>
+          <li>
+            Server squatting is forbidden, it will result in a ban.
+          </li>
+          <li>
+            Any form of hacking is forbidden, it will result in a ban.
+          </li>
+          <li>
+            Playing music or other sounds on the server is forbidden, it will result in a comms ban.
+          </li>
+          <li>
+            Abusing the <code>!calladmin</code> command is forbidden, it will result in a ban.
+          </li>
+        </ul>
+        <h3>General commands:</h3>
+        <h5>Commands can be typed direcly in chat</h5>
+        <ul>
+          <li>
+            <code>!report</code>: Report a player to the admins, if none are online.
+          </li>
+          <li>
+            <code>!rank</code>: Show your rank on the server.
+          </li>
+          <li>
+            <code>!calladmin</code>: Call an admin on Discord.
+          </li>
+          <li>
+            <code>!sl</code>: Lists all Tensor servers.
+          </li>
+          <li>
+            <code>!votekick</code>: Vote to kick a player.
+          </li>
+          <li>
+            <code>!voteban</code>: Vote to ban a player.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">AWP Servers Rules</h3>
+      </div>
+      <div class="card-body pb-0">
+        <h2>The following rules only apply to the AWP servers:</h2>
+        <ul>
+          <li>
+            Camping is not allowed. Players are not allowed to camp in their respective spawns and at the top of the tower. A player is considered to be camping when they have already been slapped several rounds in a row by the anti-camp plugin. If a player is found guilty of this, you should remind them in the chat about the no-camping rules. If they don’t comply, you can ban them for 30 minutes.
+          </li>
+          <li>
+            Bhop scripts are considered as cheating and are not allowed.
+          </li>
+        </ul>
+        <h2>The following commands only work on the AWP servers:</h2>
+        <h5>Those commands can be typed direcly in chat</h5>
+        <ul>
+          <li>
+            <code>!duel</code>: Define your 1v1 duel preferences.
+          </li>
+          <li>
+            <code>!rs</code>: Reset your score on the server.
+          </li>
+          <li>
+            <code>!showflag</code>: Decide whether or not you want to display your flag on the scoreboard.
+          </li>
+          <li>
+            <code>!settings</code>: Change your Quake sound preferences.
+          </li>
+          <li>
+            <code>!hitsound</code>: Enable/disable your HitSound sound preferences.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Surf Servers Rules</h3>
+      </div>
+      <div class="card-body pb-0">
+        <h2>The following rules only apply to the Surf servers:</h2>
+        <ul>
+          <li>
+            The use of "Surf Bots" is forbidden, and will result in a ban.
+          </li>
+          <li>
+            The use of checkpoints/stages exploits is forbidden, and will result in a ban.
+          </li>
+        </ul>
+        <h2>The following commands only work on the Surf servers:</h2>
+        <h5>Those commands can be typed direcly in chat</h5>
+        <ul>
+          <li>
+            <code>!r</code>: Reset your run.
+          </li>
+          <li>
+            <code>!s "stagenumber"</code>: Teleport to the stage.
+          </li>
+          <li>
+            <code>!end</code>: Teleport to the end.
+          </li>
+          <li>
+            <code>!style</code>: Set your surfing style.
+          </li>
+          <li>
+            <code>!help</code>: Full list of commands.
+          </li>
+          <li>
+            <code>!rtv</code>: Start a rock the vote. If enough people vote, the map will change.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Retakes Servers Rules</h3>
+      </div>
+      <div class="card-body pb-0">
+        <h2>The following rules only apply to the Retakes servers:</h2>
+        <ul>
+          <li>
+            Bhop scripts are considered as cheating and are not allowed.
+          </li>
+          <li>
+            Rushing as T is tolerated but not encouraged. Don't abuse it.
+          </li>
+        </ul>
+        <h2>The following commands only work on the Retakes servers:</h2>
+        <h5>Those commands can be typed direcly in chat</h5>
+        <ul>
+          <li>
+            <code>!guns</code>: Choose a gun.
+          </li>
+          <li>
+            <code>!votemap</code>: Start a map vote.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}

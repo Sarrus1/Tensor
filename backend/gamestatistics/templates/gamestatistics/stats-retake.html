@@ -1,0 +1,88 @@
+{% extends 'tensor_site/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% load render_table from django_tables2 %}
+{% block head %}
+<!-- Datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.5/responsive.bootstrap4.min.css">
+
+
+<style>
+  .form-inline .form-group {
+  margin-right:4px;
+}
+</style>
+{% endblock head %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Retakes Statistics</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Retakes Statistics</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Retake Servers</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              {% if filter %}
+              <div class="row mb-2">
+                <div class="col mb-2">
+                  <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button "Filter" button_type="submit" button_class="btn-info" %}
+                    <!--{% bootstrap_button 'filter' 'button' 'btn-info'%}-->
+                  </form>
+                </div>
+              </div>
+              {% endif %}
+              {% render_table table %}
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}
+<!-- /.content-wrapper -->
+{% block extra_js %}
+<script>
+$(function () {
+	$('#example2').DataTable({
+		"paging": false,
+		"lengthChange": false,
+		"searching": false,
+		"ordering": false,
+		"info": false,
+		"autoWidth": false,
+		"responsive": true,
+	});
+});
+</script>
+{% endblock extra_js %}
+<!-- page script -->
+

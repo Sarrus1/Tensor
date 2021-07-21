@@ -1,0 +1,92 @@
+﻿{% extends 'tensor_site/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<!-- Datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.5/responsive.bootstrap4.min.css">
+{% endblock head %}
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+				{% if messages %}
+        <div class="col-sm-12">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Ban protest</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Ban protest</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+					<div class="row">
+						<div class="col-12">
+							<p>
+								Before you proceed make sure you first check our banlist and search it by clicking <a href="/bans/">here</a> if you are listed and for what reason.<br>
+								If you do find yourself listed on the banlist and find the reason for this to be untrue you can write a protest.
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<form method="POST">
+								{% csrf_token %}
+								<fieldset class="form-group">
+									{{ form|crispy }}
+								</fieldset>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<p>
+								What happens after you posted your protest?<br>
+								The admins will get notified of your protest. They will then review if the ban is conclusive. After reviewing you will get a reply, which usally means within 24 hours.<br>
+								<strong>Note:</strong> Sending emails with threats to our admins, scolding or shouting will not get you unbanned and in fact we will delete your protest right away!
+							</p>
+						</div>
+					</div>
+					
+          <!-- /.card -->
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}
+<!-- /.content-wrapper -->
+<!-- page script -->
