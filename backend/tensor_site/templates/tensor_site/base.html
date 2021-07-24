@@ -6,8 +6,17 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="description"
+		content="Tensor is an online gaming community mainly focused on CS:GO and based in France.">
+
+	<!-- OGP Meta tags -->
+	<meta property="og:title" content="Tensor" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://tensor.fr" />
+	<meta property="og:image" content="{% static 'img/tensor-logo-500.png' %}" />
 
 	<title>Tensor</title>
+
 	<link href="{% static 'img/favicon.ico' %}" rel="shortcut icon" />
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
@@ -21,7 +30,6 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
 	{% block head %}{% endblock head %}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.js"></script>
-	<!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>-->
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -37,13 +45,15 @@
 					<a href="/" class="nav-link">Home</a>
 				</li>
 				<li class="nav-item d-none d-sm-inline-block">
-					<a class="nav-link" href="http://discord.tensor.fr" role="button"><i class="fab fa-discord fa-2x"></i></a>
+					<a class="nav-link" href="http://discord.tensor.fr" role="button"><i
+							class="fab fa-discord fa-2x"></i></a>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav ml-auto mr-2 justify-content-end">
 				<li>
 					{% if user.is_authenticated %}
-					<img src="{{ user.avatar }}" class="rounded-circle mr-2"><a href="{% url 'auth:logout' %}">Logout</a>
+					<img src="{{ user.avatar }}" class="rounded-circle mr-2"><a
+						href="{% url 'auth:logout' %}">Logout</a>
 					{% else %}
 					<a href="/login/">Login</a>
 					{% endif %}
@@ -68,7 +78,8 @@
 			<div class="sidebar">
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+						data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
 						<li class="nav-item has-treeview menu-open">
@@ -84,7 +95,8 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/servers/" class="nav-link {% if request.path == '/servers/'%} active {% endif%}">
+									<a href="/servers/"
+										class="nav-link {% if request.path == '/servers/'%} active {% endif%}">
 										{% if request.path == '/servers/'%}
 										<i class="fas fa-circle nav-icon"></i>
 										{% else %}
@@ -94,7 +106,8 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/news/" class="nav-link {% if request.path == '/news/'%} active {% endif%}">
+									<a href="/news/"
+										class="nav-link {% if request.path == '/news/'%} active {% endif%}">
 										{% if request.path == '/news/'%}
 										<i class="fas fa-circle nav-icon"></i>
 										{% else %}
@@ -114,7 +127,8 @@
 									</a>
 									<ul class="nav nav-treeview">
 										<li class="nav-item">
-											<a href="/bans/" class="nav-link {% if request.path == '/bans/'%} active {% endif%}">
+											<a href="/bans/"
+												class="nav-link {% if request.path == '/bans/'%} active {% endif%}">
 												{% if request.path == '/bans/'%}
 												<i class="fas fa-circle nav-icon"></i>
 												{% else %}
@@ -124,7 +138,8 @@
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="/ban-protest/" class="nav-link {% if request.path == '/ban-protest/'%} active {% endif%}">
+											<a href="/ban-protest/"
+												class="nav-link {% if request.path == '/ban-protest/'%} active {% endif%}">
 												{% if request.path == '/ban-protest/'%}
 												<i class="fas fa-circle nav-icon"></i>
 												{% else %}
@@ -140,7 +155,7 @@
 											</a>
 										</li>
 									</ul>
-								</li>		
+								</li>
 								<li class="nav-item has-treeview">
 									<a href="#"
 										class="nav-link {% if request.path == '/stats-awp/' or request.path == '/stats-retake/' or request.path == '/stats-surf/'%} active {% endif%}">
@@ -152,7 +167,8 @@
 									</a>
 									<ul class="nav nav-treeview">
 										<li class="nav-item">
-											<a href="/stats-awp/" class="nav-link {% if request.path == '/stats-awp/'%} active {% endif%}">
+											<a href="/stats-awp/"
+												class="nav-link {% if request.path == '/stats-awp/'%} active {% endif%}">
 												{% if request.path == '/stats-awp/'%}
 												<i class="fas fa-circle nav-icon"></i>
 												{% else %}
@@ -173,7 +189,8 @@
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="/stats-surf/" class="nav-link {% if request.path == '/stats-surf/'%} active {% endif%}">
+											<a href="/stats-surf/"
+												class="nav-link {% if request.path == '/stats-surf/'%} active {% endif%}">
 												{% if request.path == '/stats-surf/'%}
 												<i class="fas fa-circle nav-icon"></i>
 												{% else %}
@@ -185,7 +202,8 @@
 									</ul>
 								</li>
 								<li class="nav-item">
-									<a href="/admins/" class="nav-link {% if request.path == '/admins/'%} active {% endif%}">
+									<a href="/admins/"
+										class="nav-link {% if request.path == '/admins/'%} active {% endif%}">
 										{% if request.path == '/admins/'%}
 										<i class="fas fa-circle nav-icon"></i>
 										{% else %}
@@ -195,7 +213,8 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/server-rules/" class="nav-link {% if request.path == '/server-rules/'%} active {% endif%}">
+									<a href="/server-rules/"
+										class="nav-link {% if request.path == '/server-rules/'%} active {% endif%}">
 										{% if request.path == '/server-rules/'%}
 										<i class="fas fa-circle nav-icon"></i>
 										{% else %}
@@ -205,7 +224,8 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a href="/donations/" class="nav-link {% if 'donations' in request.path %} active {% endif%}">
+									<a href="/donations/"
+										class="nav-link {% if 'donations' in request.path %} active {% endif%}">
 										{% if 'donations' in request.path %}
 										<i class="fas fa-circle nav-icon"></i>
 										{% else %}
@@ -251,7 +271,8 @@
 		<!-- Main Footer -->
 		<footer class="main-footer">
 			<div class="alert text-center cookiealert" role="alert">
-				&#x1F36A; &#160;<b>This website uses cookies.</b> &#160;We are not using them however, because I don't know how.
+				&#x1F36A; &#160;<b>This website uses cookies.</b> &#160;We are not using them however, because I don't
+				know how.
 				&#160;<a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
 				<button type="button" class="btn btn-primary btn-sm acceptcookies">
 					I agree
@@ -262,7 +283,8 @@
 				Contact: information@tensor.fr
 			</div>
 			<!-- Default to the left -->
-			<strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+			<strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+			reserved.
 		</footer>
 	</div>
 	<!-- ./wrapper -->
