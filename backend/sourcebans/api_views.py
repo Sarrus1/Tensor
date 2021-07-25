@@ -108,7 +108,11 @@ class BansViewSet(viewsets.ModelViewSet):
 				serializer = BansSerializer(data=banInfo)
 				if serializer.is_valid():
 					self.perform_create(serializer)
-					return HttpResponse(status=200)
+					return response.Response(data={
+						"name": usersummary["personaname"]
+						}, 
+						status=200
+						)
 
 				return HttpResponse(status=500)
 

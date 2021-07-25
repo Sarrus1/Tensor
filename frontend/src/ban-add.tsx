@@ -211,8 +211,9 @@ function App(props): JSX.Element {
               },
             })
             .then((response: AxiosResponse) => {
+							let name: string = response.data.name;
               setAlertMessage({
-                message: `Banned's ban was edited`,
+                message: `Added a ban for ${name}.`,
                 severity: "success",
               });
             })
