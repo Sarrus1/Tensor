@@ -5,10 +5,13 @@ from django.db.models import Q
 
 from .models import *
 
+from discord_webhook import DiscordWebhook, DiscordEmbed
+
 from .forms import BanProtest
 
 from django.contrib.auth.decorators import login_required
 from tensor_site.decorators import login_required_message
+from tensor_site.auth_tokens import *
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -50,7 +53,8 @@ class BanProtestView(FormView):
 				if form.is_valid():
 					matchingBans = SbBans.objects.filter(
 						Q(authid__contains=steamid[7:]), Q(Q(ends__gte=mktime(localtime())) | Q(length=0))
-						).order_by('created')
+						).order_by('-created')
+					print(matchingBans.first().ends)
 					if(not matchingBans.count() > 0):
 						messages.success(request, 'There are no active bans for your steamID.', extra_tags='danger')
 						return HttpResponseRedirect("/ban-protest/")
@@ -66,7 +70,8 @@ class BanProtestView(FormView):
 						reason = protest["reason"]
 					)
 					newProtest.save()
-					messages.success(request, 'Your ban protest has been submitted and will be processed.', extra_tags='danger')
+					sendDiscordMessage(matchingBans.first().bid, matchingBans.first().name, protest["reason"])
+					messages.success(request, 'Your ban protest has been submitted and will be processed.', extra_tags='success')
 					return HttpResponseRedirect("/")
 				else:
 						return self.form_invalid(form)
@@ -82,3 +87,22 @@ class AddBanView(TemplateView):
 				return super().get(request, *args, **kwargs)
 			messages.error(request, "You don't have permission to access this page.", extra_tags='danger')
 			return HttpResponseRedirect("/")
+
+def sendDiscordMessage(bid, name, reason):
+    webhook = DiscordWebhook(url=Discord_Webhook_Ban_Protest)
+    title = 'New ban protest'
+    description = ""
+    color = 786176
+    embed = DiscordEmbed(
+			title=title,
+			description=description,
+			color=color,
+			#thumbnail={"url": topAvatarUrl},
+			url="https://tensor.fr/sourceban/index.php?p=admin&c=bans#^1",
+			)
+    embed.add_embed_field(name='Ban ID', value=bid, inline=False)
+    embed.add_embed_field(name='Player Name', value=name, inline=False)
+    embed.add_embed_field(name='Reason', value=reason, inline=False)
+    webhook.add_embed(embed)
+    webhook.execute()
+    return
