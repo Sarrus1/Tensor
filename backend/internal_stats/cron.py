@@ -1,13 +1,15 @@
 ﻿from .models import *
-from tensor_site.models import Rank_awp, Rank_retake
+from gamestatistics.models import CkPlayertimes, Rank_awp, Rank_retake
 from sourcebans.models import SbBans
 from django.db.models import Sum
 
 def GetInternalStats():
-		# Ranks query
-		total_users = 0
-		total_users += Rank_awp.objects.all().count()
-		total_users += Rank_retake.objects.all().count()
+		awpUsers = Rank_awp.objects.values_list('steam', flat=True)
+		retakesUsers = Rank_retake.objects.values_list('steam', flat=True)
+		surfUsers = CkPlayertimes.objects.values_list('steamid', flat=True)
+		allUsers = awpUsers + retakesUsers + surfUsers
+		setAllUsers = set(allUsers)
+		total_users = len(setAllUsers)
 
 		# Time query
 		days_played = 0
