@@ -11,12 +11,12 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 function App(props): JSX.Element {
-	const [searchEnd, setSearchEnd] = useState(false);
-	const [found, setFound] = useState(false);
-	const [serverName, setServerName] = useState("");
-	const [playerName, setPlayerName] = useState("");
+  const [searchEnd, setSearchEnd] = useState(false);
+  const [found, setFound] = useState(false);
+  const [serverName, setServerName] = useState("");
+  const [playerName, setPlayerName] = useState("");
   const [banDetailsData, setBanDetailsData] = useState({});
-	const [steamID, setSteamID] = useState("");
+  const [steamID, setSteamID] = useState("");
   const [customReason, setCustomReason] = useState(false);
   const [alertMessage, setAlertMessage] = useState({
     message: "",
@@ -25,13 +25,13 @@ function App(props): JSX.Element {
 
   const [helperText, setHelperText] = useState("");
 
-	const [showSearch, setShowSearch] = useState(false);
-	const handleCloseSearch = () => {
-		setShowSearch(false);
-		setFound(false);
-		setServerName("");
-		setPlayerName("");
-	}
+  const [showSearch, setShowSearch] = useState(false);
+  const handleCloseSearch = () => {
+    setShowSearch(false);
+    setFound(false);
+    setServerName("");
+    setPlayerName("");
+  };
   const handleShowSearch = () => setShowSearch(true);
 
   const formGroup: React.CSSProperties = {
@@ -123,10 +123,9 @@ function App(props): JSX.Element {
             <option value="other">Other Reason</option>
           </Select>
         </fieldset>
-
         <fieldset style={formGroup}>
-          <label>Ban Length</label>
           <TextField
+            fullWidth
             label=""
             variant="outlined"
             multiline
@@ -138,11 +137,14 @@ function App(props): JSX.Element {
               ...fieldStyle,
             }}
             onChange={(event) => {
-              let newDetailsData = banDetailsData;
-              newDetailsData["reason"] = event.target.value;
-              setBanDetailsData(newDetailsData);
+              let newBanDetailsData = banDetailsData;
+              newBanDetailsData["reason"] = event.target.value;
+              setBanDetailsData(newBanDetailsData);
             }}
           />
+        </fieldset>
+        <fieldset style={formGroup}>
+          <label>Ban Length</label>
           <Select
             native
             labelId="banlength-label"
@@ -150,7 +152,6 @@ function App(props): JSX.Element {
             style={fieldStyle}
             onChange={(event) => {
               let newDetailsData = banDetailsData;
-              newDetailsData["reason"] = event.target.value;
               setBanDetailsData(newDetailsData);
               dayjs.extend(customParseFormat);
               let endDate: number;
@@ -225,26 +226,26 @@ function App(props): JSX.Element {
               },
             })
             .then((response: AxiosResponse) => {
-							let name: string = response.data.name;
-							setPlayerName(name);
-							setSteamID(response.data.steamid);
+              let name: string = response.data.name;
+              setPlayerName(name);
+              setSteamID(response.data.steamid);
               setAlertMessage({
                 message: `Added a ban for ${name}.`,
                 severity: "success",
               });
-							setShowSearch(true);
-							axios.get(`/api/bans/kick-from-server/?steamid=${steamID}`)
-							.then((response: AxiosResponse) => {
-								setSearchEnd(true);
-								if (response.data.found === "true"){
-									setFound(true);
-									setServerName(response.data.server);
-								}
-								else{
-									setFound(false);
-									setServerName("NOT_FOUND");
-								}
-							})
+              setShowSearch(true);
+              axios
+                .get(`/api/bans/kick-from-server/?steamid=${steamID}`)
+                .then((response: AxiosResponse) => {
+                  setSearchEnd(true);
+                  if (response.data.found === "true") {
+                    setFound(true);
+                    setServerName(response.data.server);
+                  } else {
+                    setFound(false);
+                    setServerName("NOT_FOUND");
+                  }
+                });
             })
             .catch((reason: AxiosError) => {
               if (reason.response!.status === 403) {
@@ -261,27 +262,28 @@ function App(props): JSX.Element {
       >
         Add Ban
       </Button>
-			<Modal show={showSearch} onHide={handleCloseSearch}>
-				<Modal.Header closeButton>
+      <Modal show={showSearch} onHide={handleCloseSearch}>
+        <Modal.Header closeButton>
           <Modal.Title>Searching for {playerName} on our servers.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-					{!searchEnd && 
-					<>
-						<LinearProgress />
-						<p>Searching on our servers...</p>
-					</>
-					}
-					{searchEnd && found &&
-					<p>
-						Found player on {serverName} and kicked them.
-					</p>}
-					{searchEnd && !found &&
-					<p>
-						Player wasn't found, but the ban was successfuly added.
-					</p>}
+          {!searchEnd && (
+            <>
+              <LinearProgress />
+              <p>Searching on our servers...</p>
+            </>
+          )}
+          {searchEnd && found && (
+            <p>Found and kicked a player from {serverName}</p>
+          )}
+          {searchEnd && !found && (
+            <p>
+              Player wasn't found on our servers, but the ban was successfuly
+              added.
+            </p>
+          )}
         </Modal.Body>
-			</Modal>
+      </Modal>
     </>
   );
 }
