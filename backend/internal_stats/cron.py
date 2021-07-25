@@ -4,9 +4,9 @@ from sourcebans.models import SbBans
 from django.db.models import Sum
 
 def GetInternalStats():
-		awpUsers = Rank_awp.objects.values_list('steam', flat=True)
-		retakesUsers = Rank_retake.objects.values_list('steam', flat=True)
-		surfUsers = CkPlayertimes.objects.values_list('steamid', flat=True)
+		awpUsers = list(Rank_awp.objects.values_list('steam', flat=True))
+		retakesUsers = list(Rank_retake.objects.values_list('steam', flat=True))
+		surfUsers = list(CkPlayertimes.objects.values_list('steamid', flat=True))
 		allUsers = awpUsers + retakesUsers + surfUsers
 		setAllUsers = set(allUsers)
 		total_users = len(setAllUsers)
