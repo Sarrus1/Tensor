@@ -1,9 +1,9 @@
 ﻿import React, { useState } from "react";
 import { render } from "react-dom";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { TextField, Select, Snackbar } from "@material-ui/core";
+import { TextField, Select, Snackbar, LinearProgress } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 var dayjs = require("dayjs");
 var customParseFormat = require("dayjs/plugin/customParseFormat");
 
@@ -11,7 +11,12 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 function App(props): JSX.Element {
+	const [searchEnd, setSearchEnd] = useState(false);
+	const [found, setFound] = useState(false);
+	const [serverName, setServerName] = useState("");
+	const [playerName, setPlayerName] = useState("");
   const [banDetailsData, setBanDetailsData] = useState({});
+	const [steamID, setSteamID] = useState("");
   const [customReason, setCustomReason] = useState(false);
   const [alertMessage, setAlertMessage] = useState({
     message: "",
@@ -19,6 +24,15 @@ function App(props): JSX.Element {
   });
 
   const [helperText, setHelperText] = useState("");
+
+	const [showSearch, setShowSearch] = useState(false);
+	const handleCloseSearch = () => {
+		setShowSearch(false);
+		setFound(false);
+		setServerName("");
+		setPlayerName("");
+	}
+  const handleShowSearch = () => setShowSearch(true);
 
   const formGroup: React.CSSProperties = {
     marginBottom: "1rem",
@@ -212,10 +226,25 @@ function App(props): JSX.Element {
             })
             .then((response: AxiosResponse) => {
 							let name: string = response.data.name;
+							setPlayerName(name);
+							setSteamID(response.data.steamid);
               setAlertMessage({
                 message: `Added a ban for ${name}.`,
                 severity: "success",
               });
+							setShowSearch(true);
+							axios.get(`/api/bans/kick-from-server/?steamid=${steamID}`)
+							.then((response: AxiosResponse) => {
+								setSearchEnd(true);
+								if (response.data.found === "true"){
+									setFound(true);
+									setServerName(response.data.server);
+								}
+								else{
+									setFound(false);
+									setServerName("NOT_FOUND");
+								}
+							})
             })
             .catch((reason: AxiosError) => {
               if (reason.response!.status === 403) {
@@ -232,6 +261,27 @@ function App(props): JSX.Element {
       >
         Add Ban
       </Button>
+			<Modal show={showSearch} onHide={handleCloseSearch}>
+				<Modal.Header closeButton>
+          <Modal.Title>Searching for {playerName} on our servers.</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+					{!searchEnd && 
+					<>
+						<LinearProgress />
+						<p>Searching on our servers...</p>
+					</>
+					}
+					{searchEnd && found &&
+					<p>
+						Found player on {serverName} and kicked them.
+					</p>}
+					{searchEnd && !found &&
+					<p>
+						Player wasn't found, but the ban was successfuly added.
+					</p>}
+        </Modal.Body>
+			</Modal>
     </>
   );
 }

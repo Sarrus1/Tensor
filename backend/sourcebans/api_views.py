@@ -1,8 +1,8 @@
 ﻿from enum import Enum
 from django.db.models import Q
-from rest_framework import filters, permissions, pagination, serializers, viewsets, response
+from rest_framework import filters, permissions, pagination, viewsets, response
 from rest_framework.throttling import UserRateThrottle
-from django.views.generic import View
+from rest_framework.views import APIView
 from django.http import HttpResponse
 from django.utils.timezone import localtime
 from time import mktime
@@ -20,6 +20,7 @@ import valve.rcon
 import re
 
 from gamestatistics.models import Rank_awp, Rank_retake
+from servers.models import Server
 from .models import *
 from .filter import *
 from .tables import *
@@ -109,7 +110,8 @@ class BansViewSet(viewsets.ModelViewSet):
 				if serializer.is_valid():
 					self.perform_create(serializer)
 					return response.Response(data={
-						"name": usersummary["personaname"]
+						"name": usersummary["personaname"],
+						"steamid": steamid
 						}, 
 						status=200
 						)
@@ -178,13 +180,36 @@ def canAdminAddBan(aid):
 		return False
 
 
-class KickFromServerView(View):
+class KickFromServerView(APIView):
 
 		def get(self, request, *args, **kwargs):
-			address = ("", )
-			password = ""
-			with valve.rcon.RCON(address, password) as rcon:
-				response = rcon.execute("status")
-				response_text = response.body.decode("utf-8")
-				ids = re.findall("STEAM_[0-5]:[0-1]:[0-9]*", response_text)
-			return HttpResponse(status=200)
+			steamid = request.GET['steamid']
+			servers = SbServers.objects.all()
+			for server in servers:
+				address = (server.ip, server.port)
+				password = server.rcon
+				try:
+					with valve.rcon.RCON(address, password) as rcon:
+						rconResponse = rcon.execute("status")
+						response_text = rconResponse.body.decode("utf-8")
+						ids = re.findall("STEAM_[0-5]:[0-1]:[0-9]*", response_text)
+						if (steamid in ids):
+							serverName = Server.objects.get(port=server.port).name
+							rcon.execute("sm_kick #{} You have been banned from this server by an admin.".format(steamid.replace(":", "_")))
+							return response.Response(
+								data={
+									"found": "true",
+									"server": serverName
+									},
+								status=200
+							)
+				except Exception as e:
+					print(e)
+
+			return response.Response(
+				data={
+					"found": "false",
+					"server": ""
+					},
+				status=200
+			)
