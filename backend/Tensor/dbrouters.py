@@ -8,11 +8,11 @@ class router(object):
 
 		def db_for_read(self, model, **hints):
 				# Ici on associe chaque modèle à sa bdd pour la lecture.
-				if model == Rank_awp or model == RankAwpSeason or model == RankAwpSeasonId:
+				if model in [Rank_awp, RankAwpSeason, RankAwpSeasonId]:
 						return 'rank_awp'
 				if model == Rank_retake:
 						return 'rank_retake'
-				if model == CkPlayertimes:
+				if model in [CkPlayertimes, CkWrcps, CkPlayertemp, CkPlayerrank, CkPlayeroptions2, CkNewmaps, CkMaptier, CkLatestrecords, CkBonus, CkAnnouncements]:
 						return 'surftimer'
 				if model._meta.app_label == 'sourcebans':
 						return 'sourcebans'
