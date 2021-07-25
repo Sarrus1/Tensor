@@ -366,7 +366,7 @@ function Row(props) {
     },
     {
       accessor: "Banned from",
-      data: row.sid,
+      data: row.bannedFrom,
     },
     {
       accessor: "Total Bans",
@@ -417,10 +417,6 @@ function Row(props) {
 
   const fieldStyle: React.CSSProperties = {
     marginBottom: "1rem",
-  };
-
-  const buttonsStyle: React.CSSProperties = {
-    textAlign: "right",
   };
 
   return (
@@ -774,6 +770,10 @@ function Row(props) {
                         setEditDetailsData(newEditDetailsData);
                       }}
                     >
+                      <option value="" selected="">
+                      {" "}
+                      -- Ban Length --{" "}
+                      </option>
                       <option value="0">Permanent</option>
                       <optgroup label="minutes">
                         <option value="1">1 minute</option>

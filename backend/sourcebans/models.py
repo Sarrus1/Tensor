@@ -169,6 +169,13 @@ class SbBans(models.Model):
 				length = self.ban_length if self.ban_length != "Permanent" else ""
 				
 				return mark_safe("<span class='badge badge-{}' style='text-aligne:center'>{} {}</span>".format(badge, length, status))
+		
+		@property
+		def bannedFrom(self):
+				if self.sid_id==0:
+					return "Website"
+				else:
+					return str(self.sid)
 
 		@property
 		def steam64(self):

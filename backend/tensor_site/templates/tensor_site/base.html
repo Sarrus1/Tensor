@@ -118,7 +118,7 @@
 								</li>
 								<li class="nav-item has-treeview">
 									<a href="#"
-										class="nav-link {% if request.path == '/bans/' or request.path == '/ban-protest/'%} active {% endif%}">
+										class="nav-link {% if request.path == '/bans/' or request.path == '/ban-protest/' or request.path == '/ban-add/'%} active {% endif%}">
 										<i class="nav-icon fas fa-copy"></i>
 										<p>
 											Bans
@@ -148,6 +148,18 @@
 												<p>Protest a ban</p>
 											</a>
 										</li>
+										{% if user.is_admin %}
+										<li class="nav-item">
+											<a href="/ban-add/" class="nav-link {% if request.path == '/ban-add/'%} active {% endif%}">
+												{% if request.path == '/ban-add/'%}
+												<i class="fas fa-circle nav-icon"></i>
+												{% else %}
+												<i class="far fa-circle nav-icon"></i>
+												{% endif%}
+												<p>Add Ban</p>
+											</a>
+										</li>
+										{% endif %}
 										<li class="nav-item">
 											<a href="http://ban.tensor.fr" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>

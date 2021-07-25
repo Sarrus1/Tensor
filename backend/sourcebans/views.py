@@ -70,3 +70,15 @@ class BanProtestView(FormView):
 					return HttpResponseRedirect("/")
 				else:
 						return self.form_invalid(form)
+
+
+decorators = [login_required, login_required_message]
+@method_decorator(decorators, name='dispatch')
+class AddBanView(TemplateView):
+		template_name = 'sourcebans/ban-add.html'
+
+		def get(self, request, *args, **kwargs):
+			if self.request.user.is_admin:
+				return super().get(request, *args, **kwargs)
+			messages.error(request, "You don't have permission to access this page.", extra_tags='danger')
+			return HttpResponseRedirect("/")
