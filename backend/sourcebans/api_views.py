@@ -81,9 +81,10 @@ class BansViewSet(viewsets.ModelViewSet):
 						steamid64 = SteamID(steamid).as_64
 					usersummary = steamuserinfo.get_player_summaries(steamid64)['response']['players'][0]
 				except:
-					return response.Response(status=500)
-
+					return response.Response(data={"error": "INVALID_STEAMID"}, status=422, )
+				
 				steamid = SteamID(steamid64).as_steam2
+
 				lastip = Rank_awp.objects.filter(steam=steamid).first()
 				if(lastip is None):
 					lastip = Rank_retake.objects.filter(steam=steamid).first()
