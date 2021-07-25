@@ -770,6 +770,10 @@ function Row(props) {
                         setEditDetailsData(newEditDetailsData);
                       }}
                     >
+                      <option value="" selected="">
+                      {" "}
+                      -- Ban Length --{" "}
+                      </option>
                       <option value="0">Permanent</option>
                       <optgroup label="minutes">
                         <option value="1">1 minute</option>
