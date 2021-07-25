@@ -1,10 +1,5 @@
 {% extends 'tensor_site/base.html' %}
 {% load static %}
-{% block head %}
-<!-- Datatable -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.5/responsive.bootstrap4.min.css">
-{% endblock head %}
 {% block content %}
 
 <!-- Content Wrapper. Contains page content -->
@@ -14,12 +9,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Ban list</h1>
+          <h1 class="m-0 text-dark">Add Ban</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active">Bans list</li>
+            <li class="breadcrumb-item active">Add Ban</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -43,10 +38,5 @@
 <!-- /.content-wrapper -->
 <!-- page script -->
 {% block extra_js %}
-<script>
-	const is_admin={{is_admin}};
-	const steamid2="{{steamid2}}";
-  const defaultSearch="{{search}}";
-</script>
-<script src="{% static 'js/bans_list.js' %}"></script>
+<script src="{% static 'js/ban_add.js' %}"></script>
 {% endblock extra_js %}

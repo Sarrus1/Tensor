@@ -366,7 +366,7 @@ function Row(props) {
     },
     {
       accessor: "Banned from",
-      data: row.sid,
+      data: row.bannedFrom,
     },
     {
       accessor: "Total Bans",
@@ -417,10 +417,6 @@ function Row(props) {
 
   const fieldStyle: React.CSSProperties = {
     marginBottom: "1rem",
-  };
-
-  const buttonsStyle: React.CSSProperties = {
-    textAlign: "right",
   };
 
   return (

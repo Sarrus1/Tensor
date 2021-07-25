@@ -1,7 +1,8 @@
 ﻿var path = require('path');
 module.exports = {
   entry: {
-    sourcebans: path.join(__dirname, "../src/sourcebans.tsx"),
+    bans_list: path.join(__dirname, "../src/bans-list.tsx"),
+    ban_add: path.join(__dirname, "../src/ban-add.tsx"),
     donations: path.join(__dirname, "../src/donations.tsx"),
     servers: path.join(__dirname, "../src/servers.tsx"),
   },

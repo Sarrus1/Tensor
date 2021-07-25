@@ -70,3 +70,9 @@ class BanProtestView(FormView):
 					return HttpResponseRedirect("/")
 				else:
 						return self.form_invalid(form)
+
+
+decorators = [login_required, login_required_message]
+@method_decorator(decorators, name='dispatch')
+class AddBanView(TemplateView):
+		template_name = 'sourcebans/ban-add.html'

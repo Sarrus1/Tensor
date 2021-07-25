@@ -6,5 +6,6 @@ router = routers.DefaultRouter()
 router.register('', BansViewSet)
 
 urlpatterns = [
-	path('', include(router.urls))
+	path('', include(router.urls)),
+  path('kick-from-server/<str:steamid>', KickFromServerView.as_view(), name="kick-from-server")
 ]
