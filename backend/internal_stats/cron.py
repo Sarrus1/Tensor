@@ -1,12 +1,12 @@
 ﻿from .models import *
-from gamestatistics.models import CkPlayertimes, Rank_awp, Rank_retake
+from gamestatistics.models import CkWrcps, Rank_awp, Rank_retake
 from sourcebans.models import SbBans
 from django.db.models import Sum
 
 def GetInternalStats():
 		awpUsers = list(Rank_awp.objects.values_list('steam', flat=True))
 		retakesUsers = list(Rank_retake.objects.values_list('steam', flat=True))
-		surfUsers = list(CkPlayertimes.objects.values_list('steamid', flat=True))
+		surfUsers = list(CkWrcps.objects.values_list('steamid', flat=True))
 		allUsers = awpUsers + retakesUsers + surfUsers
 		setAllUsers = set(allUsers)
 		total_users = len(setAllUsers)
