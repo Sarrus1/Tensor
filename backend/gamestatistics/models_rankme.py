@@ -118,7 +118,7 @@ class RankMeModel(models.Model):
 				time = self.connected
 				hour = time//3600
 				minute = str((time - hour*3600)//60)+"m"
-				return str(hour)+'h'+minute
+				return str(hour)+'h '+minute
 
 		def total(self):
 				return self.connected
