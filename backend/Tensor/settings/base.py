@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tensor_site.apps.TensorSiteConfig',
     'gamestatistics.apps.GamestatisticsConfig',
     'sourcebans.apps.SourcebansConfig',
+    'polls.apps.PollsConfig',
     'adminform.apps.AdminformConfig',
     'servers.apps.ServersConfig',
     'internal_stats.apps.InternalStatsConfig',
