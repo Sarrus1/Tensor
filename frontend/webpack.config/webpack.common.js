@@ -1,10 +1,11 @@
-﻿var path = require('path');
+﻿var path = require("path");
 module.exports = {
   entry: {
     bans_list: path.join(__dirname, "../src/bans-list.tsx"),
     ban_add: path.join(__dirname, "../src/ban-add.tsx"),
     donations: path.join(__dirname, "../src/donations.tsx"),
     servers: path.join(__dirname, "../src/servers.tsx"),
+    pollColors: path.join(__dirname, "../src/pollColors.tsx"),
   },
   output: {
     path: path.join(__dirname, "../../backend/static/js"),
@@ -17,11 +18,14 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [['@babel/preset-env', { modules: false }], "@babel/react"],
+            presets: [
+              ["@babel/preset-env", { modules: false }],
+              "@babel/react",
+            ],
           },
         },
         exclude: /node_modules/,
       },
     ],
   },
-}
+};
