@@ -19,6 +19,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/Tensor
-            /var/scripts/hooks/Tensor/deploy.sh
-
+            cd Tensor/frontend
+            npm i && npm run build
+            cd ../deployment
+            docker-compose build && docker-compose up -d

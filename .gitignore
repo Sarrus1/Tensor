@@ -9,11 +9,11 @@ node_modules
 env/
 __pycache__/
 webpack-stats.json
-backend/static/js
 package-lock.json
-backend/static/js/*.js
+backend/static/js/
 *.sql
 backend/tensor_site/static/admin/*
 backend/tensor_site/static/markdownx/*
 backend/tensor_site/static/django_tables2/*
 backend/tensor_site/static/css
+.env
