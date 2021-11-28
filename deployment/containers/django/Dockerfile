@@ -1,6 +1,6 @@
-FROM python:3.9.7-slim-buster
+FROM python:3.10.0-slim-buster
 
-RUN apt-get update && apt-get -y install default-libmysqlclient-dev gcc
+RUN apt-get update && apt-get -y install default-libmysqlclient-dev gcc cron && touch /var/log/cron.log
 RUN python -m pip install -U  pip
 COPY ./backend/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
@@ -23,3 +23,4 @@ COPY ./backend .
 RUN chown -R server:server $SERVER_HOME
 USER server
 RUN python3 manage.py collectstatic --noinput
+RUN python3 manage.py crontab add
