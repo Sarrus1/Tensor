@@ -18,7 +18,7 @@ ENV DJANGO_SETTINGS_MODULE=Tensor.settings.production
 
 # copy project
 WORKDIR $SERVER_HOME
-RUN rm -rf ./
+RUN rm -rf ./*
 COPY ./backend .
 RUN chown -R server:server $SERVER_HOME
 USER server
