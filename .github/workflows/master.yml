@@ -20,6 +20,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd Tensor/frontend
+            git pull
             npm i && npm run build
             cd ../deployment
             docker-compose build && docker-compose up -d
