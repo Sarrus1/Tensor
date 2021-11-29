@@ -5,7 +5,7 @@ services:
     build:
       context: ../
       dockerfile: deployment/containers/django/Dockerfile
-    command: service cron start && gunicorn Tensor.wsgi:application --log-level info --log-file=- --name tensor -b 0.0.0.0:8000 --reload
+    command: gunicorn Tensor.wsgi:application --log-level info --log-file=- --name tensor -b 0.0.0.0:8000 --reload
     volumes:
       - static_volume:/home/server/tensor/static
       - media_volume:/home/server/tensor/media
