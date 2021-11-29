@@ -1,8 +1,9 @@
-import a2s
-from .models import Server, PlayerCount
-import re
-from discord_webhook import DiscordWebhook, DiscordEmbed
+﻿import a2s
 from tensor_site import auth_tokens
+from discord_webhook import DiscordWebhook, DiscordEmbed
+import re
+from servers.models import Server, PlayerCount
+from django.core.management.base import BaseCommand
 
 
 def send_discord_announce(server, successful):
@@ -35,7 +36,7 @@ def playercounter():
         address = (server.ip, server.port)
         attempts = 0
         isdown = True
-				# Attempt to query the server 3 times maximum
+        # Attempt to query the server 3 times maximum
         while attempts < 3 and isdown:
             try:
                 query = a2s.info(address, timeout=5, encoding=None)
@@ -58,8 +59,8 @@ def playercounter():
             except:
                 attempts += 1
                 continue
-				
-				# If the queries failed 3 times in a row, send a discord message
+
+                # If the queries failed 3 times in a row, send a discord message
         if attempts == 3:
             playernumber = 0
             maxplayer = 64
@@ -68,7 +69,8 @@ def playercounter():
             servername = ""
             # Discord webhook message
             # Check if the server was down before to avoid spam
-            queryset = PlayerCount.objects.filter(server=server).order_by("-id")
+            queryset = PlayerCount.objects.filter(
+                server=server).order_by("-id")
             if not queryset:
                 try:
                     send_discord_announce(server, False)
@@ -86,7 +88,7 @@ def playercounter():
                                  max_player=maxplayer, server=server, current_map=current_map, isdown=isdown)
         serverstat.save()
         if servername != "" and servername != server.name:
-            server.name=servername
+            server.name = servername
             server.save()
         Name_id = Server.objects.get(name=server.name)
         queryset = PlayerCount.objects.filter(server=Name_id)
@@ -95,3 +97,10 @@ def playercounter():
         if queryset.count() >= 36:
             to_delete = PlayerCount.objects.values()[:1].get()
             PlayerCount.objects.filter(id=to_delete['id']).delete()
+
+
+class Command(BaseCommand):
+    help = 'Query the servers'
+
+    def handle(self, *args, **options):
+        playercounter()

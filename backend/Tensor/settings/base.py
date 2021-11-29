@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'paypal.standard.ipn',
     'django_filters',
-    'django_crontab',
     'django_tables2',
     'bootstrap4',
     'crispy_forms',
@@ -146,14 +145,6 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
-
-CRONJOBS = [
-    ('*/5 * * * *', 'servers.cron.playercounter'),
-    ('0 * * * *', 'internal_stats.cron.GetInternalStats'),
-    ('0 22 * * *', 'gamestatistics.cron.getChampions')
-]
-
-CRONTAB_DJANGO_SETTINGS_MODULE = 'Tensor.settings.production'
 
 # SteamAuth
 

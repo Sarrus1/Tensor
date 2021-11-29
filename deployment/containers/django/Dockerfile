@@ -23,4 +23,4 @@ COPY ./backend .
 RUN chown -R server:server $SERVER_HOME
 USER server
 RUN python3 manage.py collectstatic --noinput
-RUN python3 manage.py crontab add
+RUN python3 manage.py migrate
