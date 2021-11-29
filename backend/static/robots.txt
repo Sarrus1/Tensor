@@ -1,0 +1,5 @@
+﻿User-agent: * 
+Disallow: /stats-awp/?page=
+
+User-agent: * 
+Disallow: /stats-retake/?page=
