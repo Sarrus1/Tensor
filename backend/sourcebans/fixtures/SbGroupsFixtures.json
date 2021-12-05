@@ -1,0 +1,42 @@
+[
+  {
+    "type": 3,
+    "name": "AWP Servers",
+    "flags": 0
+  },
+  {
+    "type": 1,
+    "name": "Admins_Web",
+    "flags": 1980822801
+  },
+  {
+    "type": 3,
+    "name": "Surf Servers",
+    "flags": 0
+  },
+  {
+    "type": 3,
+    "name": "Retakes Servers",
+    "flags": 0
+  },
+  {
+    "type": 1,
+    "name": "Moderators_Web",
+    "flags": 1073742848
+  },
+  {
+    "type": 3,
+    "name": "Deagle Servers",
+    "flags": 0
+  },
+  {
+    "type": 3,
+    "name": "Bhop Servers",
+    "flags": 0
+  },
+  {
+    "type": 3,
+    "name": "KZ Servers",
+    "flags": 0
+  }
+]
