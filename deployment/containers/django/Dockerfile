@@ -8,6 +8,10 @@ RUN pip install -r requirements.txt
 # create the server user
 RUN adduser server
 
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # create the appropriate directories
 ENV HOME=/home/server
 ENV SERVER_HOME=/home/server/tensor
@@ -20,7 +24,7 @@ ENV DJANGO_SETTINGS_MODULE=Tensor.settings.production
 WORKDIR $SERVER_HOME
 RUN rm -rf ./*
 COPY ./backend .
+RUN mkdir $SERVER_HOME/staticfiles
+RUN mkdir $SERVER_HOME/mediafiles
 RUN chown -R server:server $SERVER_HOME
 USER server
-RUN python3 manage.py collectstatic --noinput
-RUN python3 manage.py migrate

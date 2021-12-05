@@ -23,4 +23,4 @@ jobs:
             git pull
             npm i && npm run build
             cd ../deployment
-            docker-compose build && docker-compose up -d
+            docker-compose down && docker-compose up -d --build
