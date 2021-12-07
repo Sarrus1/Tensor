@@ -7,6 +7,10 @@ DEBUG = False
 
 DATABASE_ROUTERS = ['Tensor.dbrouters.router']
 
+ALLOWED_HOSTS = ['tensor.fr', 'www.tensor.fr']
+
+USE_X_FORWARDED_HOST = True
+
 DATABASES = {
     'default': {
         'NAME': 'Tensor',
