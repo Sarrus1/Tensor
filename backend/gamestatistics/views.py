@@ -64,7 +64,7 @@ class SurfStatsView(TemplateView):
 
 def AwpStatsView(request, steamid):
     user = Rank_awp.objects.filter(steam=steamid).first()
-    if user is not None:
+    if user is None:
         raise Http404("Steamid does not exist")
     playtime = user.time()
     if user.deaths == 0:
@@ -103,7 +103,7 @@ def AwpStatsView(request, steamid):
 
 def RetakesStatsView(request, steamid):
     user = Rank_retake.objects.filter(steam=steamid).first()
-    if user is not None:
+    if user is None:
         raise Http404("Steamid does not exist")
     playtime = user.time()
     if user.deaths == 0:
