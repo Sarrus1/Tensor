@@ -1,5 +1,2 @@
 ﻿User-agent: * 
-Disallow: /stats-awp
-
-User-agent: * 
-Disallow: /stats-retake
+Disallow: /stats
