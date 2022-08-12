@@ -5,6 +5,7 @@ services:
     build:
       context: ../
       dockerfile: deployment/containers/django/Dockerfile
+    restart: always
     command: sh start_server.sh
     volumes:
       - static_volume:/home/server/tensor/staticfiles
