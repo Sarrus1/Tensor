@@ -46,7 +46,7 @@ DATABASES = {
                     }
     },
     'sourcebans': {
-        'NAME': 'sourceban',
+        'NAME': 'sourcebans',
         'ENGINE': 'mysql.connector.django',
         'USER': 'awp',
         'PASSWORD': password_DB_awp,
