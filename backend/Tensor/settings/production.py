@@ -19,7 +19,9 @@ DATABASES = {
         'PASSWORD': password_DB_tensor,
         'HOST': '172.17.0.1',
         'PORT': '3306',
-        'OPTIONS': {'charset': 'utf8mb4'},
+        'OPTIONS': {'charset': 'utf8mb4',
+                    'auth_plugin': 'mysql_native_password'
+                    }
     },
     'rank_awp': {
         'NAME': 'rank_awp',
@@ -28,6 +30,9 @@ DATABASES = {
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
         'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4',
+                    'auth_plugin': 'mysql_native_password'
+                    }
     },
     'surftimer': {
         'NAME': 'surftimer',
@@ -36,6 +41,9 @@ DATABASES = {
         'PASSWORD': password_DB_awp,
         'HOST': '192.168.1.105',
         'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4',
+                    'auth_plugin': 'mysql_native_password'
+                    }
     },
     'sourcebans': {
         'NAME': 'sourceban',
@@ -44,6 +52,9 @@ DATABASES = {
         'PASSWORD': password_DB_sb,
         'HOST': '172.17.0.1',
         'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4',
+                    'auth_plugin': 'mysql_native_password'
+                    }
     },
     'rank_retake': {
         'NAME': 'retake_rank',
@@ -52,6 +63,9 @@ DATABASES = {
         'PASSWORD': password_DB_retakes,
         'HOST': '172.17.0.1',
         'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4',
+                    'auth_plugin': 'mysql_native_password'
+                    }
     },
     'tvip': {
         'NAME': 'VIP',
@@ -60,6 +74,9 @@ DATABASES = {
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
         'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4',
+                    'auth_plugin': 'mysql_native_password'
+                    }
     },
 }
 
