@@ -16,7 +16,7 @@ DATABASES = {
         'NAME': 'Tensor',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'tensor',
-        'PASSWORD': password_DB_awp,
+        'PASSWORD': password_DB_tensor,
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
