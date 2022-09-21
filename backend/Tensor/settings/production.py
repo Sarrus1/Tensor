@@ -26,7 +26,7 @@ DATABASES = {
     'rank_awp': {
         'NAME': 'rank_awp',
         'ENGINE': 'mysql.connector.django',
-        'USER': 'csgoawp',
+        'USER': 'awp',
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
         'PORT': '3306',
@@ -37,8 +37,8 @@ DATABASES = {
     'surftimer': {
         'NAME': 'surftimer',
         'ENGINE': 'mysql.connector.django',
-        'USER': 'csgosurf',
-        'PASSWORD': password_DB_awp,
+        'USER': 'surf',
+        'PASSWORD': password_DB_surf,
         'HOST': '192.168.1.105',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -48,8 +48,8 @@ DATABASES = {
     'sourcebans': {
         'NAME': 'sourceban',
         'ENGINE': 'mysql.connector.django',
-        'USER': 'sourceban',
-        'PASSWORD': password_DB_sb,
+        'USER': 'awp',
+        'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -59,7 +59,7 @@ DATABASES = {
     'rank_retake': {
         'NAME': 'retake_rank',
         'ENGINE': 'mysql.connector.django',
-        'USER': 'retake',
+        'USER': 'retakes',
         'PASSWORD': password_DB_retakes,
         'HOST': '172.17.0.1',
         'PORT': '3306',
@@ -70,7 +70,7 @@ DATABASES = {
     'tvip': {
         'NAME': 'VIP',
         'ENGINE': 'mysql.connector.django',
-        'USER': 'csgoawp',
+        'USER': 'awp',
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
         'PORT': '3306',
