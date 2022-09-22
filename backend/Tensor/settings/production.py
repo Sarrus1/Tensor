@@ -13,19 +13,16 @@ USE_X_FORWARDED_HOST = True
 
 DATABASES = {
     'default': {
-        'NAME': 'Tensor',
-        'ENGINE': 'mysql.connector.django',
+        'NAME': 'tensor',
+        'ENGINE': 'django.db.backends.mysql',
         'USER': 'tensor',
         'PASSWORD': password_DB_tensor,
         'HOST': '172.17.0.1',
         'PORT': '3306',
-        'OPTIONS': {'charset': 'utf8mb4',
-                    'auth_plugin': 'mysql_native_password'
-                    }
     },
     'rank_awp': {
         'NAME': 'rank_awp',
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'USER': 'awp',
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
@@ -36,7 +33,7 @@ DATABASES = {
     },
     'surftimer': {
         'NAME': 'surftimer',
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'USER': 'surf',
         'PASSWORD': password_DB_surf,
         'HOST': '192.168.1.105',
@@ -47,7 +44,7 @@ DATABASES = {
     },
     'sourcebans': {
         'NAME': 'sourcebans',
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'USER': 'awp',
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
@@ -58,7 +55,7 @@ DATABASES = {
     },
     'rank_retake': {
         'NAME': 'retake_rank',
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'USER': 'retakes',
         'PASSWORD': password_DB_retakes,
         'HOST': '172.17.0.1',
@@ -69,7 +66,7 @@ DATABASES = {
     },
     'tvip': {
         'NAME': 'VIP',
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'USER': 'awp',
         'PASSWORD': password_DB_awp,
         'HOST': '172.17.0.1',
