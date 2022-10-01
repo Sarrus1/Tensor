@@ -36,7 +36,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'surf',
         'PASSWORD': password_DB_surf,
-        'HOST': '192.168.1.105',
+        'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
                     'auth_plugin': 'mysql_native_password'
@@ -54,7 +54,7 @@ DATABASES = {
                     }
     },
     'rank_retake': {
-        'NAME': 'retake_rank',
+        'NAME': 'rank_retakes',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'retakes',
         'PASSWORD': password_DB_retakes,

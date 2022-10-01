@@ -211,7 +211,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 LOGIN_URL = "/login/"
-EMAIL_HOST = "192.168.1.121"
+EMAIL_HOST = "tensor.fr"
 EMAIL_HOST_USER = 'information@tensor.fr'
 EMAIL_HOST_PASSWORD = password_email
 

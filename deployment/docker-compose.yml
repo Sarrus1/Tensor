@@ -6,26 +6,19 @@ services:
       context: ../
       dockerfile: deployment/containers/django/Dockerfile
     restart: always
-    command: sh start_server.sh
     volumes:
       - static_volume:/home/server/tensor/staticfiles
       - media_volume:/home/server/tensor/mediafiles
     ports:
-      - 8000:8000
+      - "8084:8000"
     env_file:
       - ./.env
-
-  nginx:
-    build: ./containers/nginx
-    ports:
-      - 1337:1337
-    volumes:
-      - ../server:/var/app
-      - static_volume:/home/server/tensor/staticfiles
-      - media_volume:/home/server/tensor/mediafiles
-    depends_on:
-      - django
 
 volumes:
   static_volume:
   media_volume:
+
+networks:
+  default:
+    external: true
+    name: external
