@@ -16,11 +16,11 @@ jobs:
         with:
           host: tensor.fr
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd Tensor/frontend
+            cd services/Tensor/frontend
             git pull
             npm i && npm run build
             cd ../deployment
-            docker-compose down && docker-compose up -d --build
+            docker-compose down && docker-compose up -d --build django
