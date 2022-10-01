@@ -1,13 +1,13 @@
 ﻿import a2s
-from tensor_site import auth_tokens
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import re
 from servers.models import Server, PlayerCount
 from django.core.management.base import BaseCommand
+from os import getenv
 
 
 def send_discord_announce(server, successful):
-    webhook = DiscordWebhook(url=auth_tokens.Discord_Webhook_Server_Status)
+    webhook = DiscordWebhook(url=getenv("DISCORD_WEBHOOK_SERVER_STATUS"))
     if successful:
         title = 'Server is back online'
         description = "A server query was successful. The server might is back online."

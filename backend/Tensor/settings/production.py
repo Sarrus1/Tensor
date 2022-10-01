@@ -16,7 +16,7 @@ DATABASES = {
         'NAME': 'tensor',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'tensor',
-        'PASSWORD': password_DB_tensor,
+        'PASSWORD': os.getenv("DB_TENSOR_PASS"),
         'HOST': '172.17.0.1',
         'PORT': '3306',
     },
@@ -24,7 +24,7 @@ DATABASES = {
         'NAME': 'rank_awp',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'awp',
-        'PASSWORD': password_DB_awp,
+        'PASSWORD': os.getenv("DB_AWP_PASS"),
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -35,7 +35,7 @@ DATABASES = {
         'NAME': 'surftimer',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'surf',
-        'PASSWORD': password_DB_surf,
+        'PASSWORD': os.getenv("DB_SURF_PASS"),
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -45,8 +45,8 @@ DATABASES = {
     'sourcebans': {
         'NAME': 'sourcebans',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'awp',
-        'PASSWORD': password_DB_awp,
+        'USER': 'sourcebans',
+        'PASSWORD': os.getenv("DB_SOURCEBANS_PASS"),
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -57,7 +57,7 @@ DATABASES = {
         'NAME': 'rank_retakes',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'retakes',
-        'PASSWORD': password_DB_retakes,
+        'PASSWORD': os.getenv("DB_RETAKES_PASS"),
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -68,7 +68,7 @@ DATABASES = {
         'NAME': 'VIP',
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'awp',
-        'PASSWORD': password_DB_awp,
+        'PASSWORD': os.getenv("DB_AWP_PASS"),
         'HOST': '172.17.0.1',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4',
@@ -78,7 +78,7 @@ DATABASES = {
 }
 
 # Paypal
-PAYPAL_RECEIVER_EMAIL = paypalEmail
+PAYPAL_RECEIVER_EMAIL = os.getenv("PAYPAL_EMAIL")
 PAYPAL_TEST = False
 ABSOLUTE_URL = 'tensor.fr'
 

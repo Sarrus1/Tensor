@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from tensor_site.auth_tokens import *
 import environ
 
 env = environ.Env()
@@ -26,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = Secret_Key
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Application definition
 
@@ -150,7 +149,7 @@ STATICFILES_DIRS = [
 ROOT_URLCONF = 'Tensor.urls'
 
 # Provide the api-key here
-SOCIAL_AUTH_STEAM_API_KEY = SteamWebAPIKey
+SOCIAL_AUTH_STEAM_API_KEY = os.getenv("STEAM_API_KEY")
 # Fetch extra information about the user from the steam web api
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
 
@@ -213,7 +212,7 @@ SOCIAL_AUTH_PIPELINE = (
 LOGIN_URL = "/login/"
 EMAIL_HOST = "tensor.fr"
 EMAIL_HOST_USER = 'information@tensor.fr'
-EMAIL_HOST_PASSWORD = password_email
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

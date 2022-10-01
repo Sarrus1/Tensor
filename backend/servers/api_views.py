@@ -7,7 +7,8 @@ from .models import ServerControlModel
 import paramiko
 from .forms import ServerControlForm
 import threading
-from tensor_site.auth_tokens import *
+
+from os import getenv
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -66,7 +67,7 @@ def AsyncSSHCommand(body):
 
     server = Server.objects.get(port=port)
     hostname = "cs.tensor.fr"
-    password = password_DB_awp
+    password = getenv("DB_AWP_PASS")
     username = server.user
     sshPort = server.sshport
     sshCommand = "cd /home/{} && ./{} {}".format(

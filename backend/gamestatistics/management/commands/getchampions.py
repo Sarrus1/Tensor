@@ -1,17 +1,16 @@
 ﻿from django.core.management.base import BaseCommand
 from discord_webhook import DiscordWebhook, DiscordEmbed
 from gamestatistics.models import *
-from tensor_site.auth_tokens import *
 from django.utils import timezone
 from steamwebapi.api import ISteamUser
-from tensor_site.auth_tokens import *
 from steam.steamid import SteamID
+from os import getenv
 
-steamuserinfo = ISteamUser(steam_api_key=SteamWebAPIKey)
+steamuserinfo = ISteamUser(steam_api_key=getenv("STEAM_API_KEY"))
 
 
 def sendDiscordMessage(players, topAvatarUrl):
-    webhook = DiscordWebhook(url=Discord_Webhook_AWP_Rank)
+    webhook = DiscordWebhook(url=getenv("DISCORD_WEBHOOK_AWP_RANK"))
     title = '🏆 Champions of the day 🏆'
     description = "The following players have the **highest score** on the AWP server for this season, as of today."
     color = 786176
