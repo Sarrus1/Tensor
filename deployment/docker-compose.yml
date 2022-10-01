@@ -16,6 +16,7 @@ services:
       - DB_TENSOR_PASS
       - DB_SURF_PASS
       - DB_SOURCEBANS_PASS
+      - DB_RETAKES_PASS
       - EMAIL_PASS
       - STEAM_API_KEY
       - SECRET_KEY
