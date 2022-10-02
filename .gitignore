@@ -9,7 +9,6 @@ node_modules
 env/
 __pycache__/
 webpack-stats.json
-package-lock.json
 backend/static/js/
 *.sql
 backend/tensor_site/static/admin/*

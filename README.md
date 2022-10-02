@@ -16,8 +16,8 @@ Tests haven't yet been implemented in the project, however Continuous Integratio
 
 ## Requirements (for collaborators)
 
-- Python3 (Tested with 3.9)
-- Node.js (14.17.3) and npm (latest)
+- Python3 (Tested with 3.10)
+- Node.js (16.13.2) and npm (latest)
 
 ## Installation (for collaborators)
 
@@ -25,19 +25,20 @@ Tests haven't yet been implemented in the project, however Continuous Integratio
 
 - Clone this repository.
 - Go to `backend/`.
-- Create the `backend/tensor_site/auth_tokens.py` file following the `backend/Tensor/auth_tokens_sample.txt` template.
+- Create the `backend/.env` file following the `backend/.env.sample.txt` template.
 - Create a virtual environment with `python3 -m virtualenv env` or `python -m virtualenv env` or (for Windows) `py -m virtualenv env`.
 - Activate your virtual environment with `source env/bin/activate` or (for Windows) `env\Scripts\activate.bat`.
 - Install the required modules with `pip install -r requirements.txt`.
 - Make your migrations with `python manage.py migrate` or (for Windows) `py manage.py migrate` (if this fails, go down to the N.B section).
 
-2. Frontend
+1. Frontend
 
 - Go to `frontend/src`.
 - Install the node modules using `npm i`.
 - Transpile the React code using `npm run watch`.
 
 ## N.B
+
 - The following fixes may not apply anymore.
 - During the installation for development, there might be an issue while creating the database. To solve it, you have to comment out the `StandardResultsSetPagination` class of `backend/servers/views.py` and comment out the `pagination_class` line of the same file, while you apply the migrations.
 - The issue comes from the lack of migrations for database tables managed by SourceMod plugins. In the future, I will add some fixtures to fix this.
