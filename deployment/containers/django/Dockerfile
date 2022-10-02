@@ -29,4 +29,4 @@ RUN mkdir $SERVER_HOME/mediafiles
 RUN chown -R server:server $SERVER_HOME
 USER server
 
-CMD [ "sh start_server.sh" ]
+CMD ["/bin/bash", "start_server.sh"]
